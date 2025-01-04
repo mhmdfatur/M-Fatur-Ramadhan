@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Pengaturan AC Otomatis</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sistem Pengaturan AC Otomatis</h1>
+      <label for="suhu">Masukkan Suhu Ruangan (°C):</label>
+      <input type="number" id="suhu" min="0" max="40" placeholder="0-40" />
+      <button onclick="hitungKecepatanKipas()">Hitung Kecepatan Kipas</button>
+      <h2 id="hasil"></h2>
+    </div>
+
+    <script>
+      function hitungKecepatanKipas() {
+        const suhuInput = parseFloat(document.getElementById("suhu").value);
+        let kecepatanKipas;
+
+        // Validasi input suhu
+        if (suhuInput < 0 || suhuInput > 40 || isNaN(suhuInput)) {
+          alert("Masukkan suhu yang valid (0-40°C)");
+          return;
+        }
+
+        // Logika fuzzy untuk menentukan kecepatan kipas
+        if (suhuInput <= 20) {
+          // Suhu rendah
+          kecepatanKipas = 20; // Rendah
+        } else if (suhuInput > 20 && suhuInput <= 30) {
+          // Suhu sedang
+          kecepatanKipas = 50; // Sedang
+        } else {
+          // Suhu tinggi
+          kecepatanKipas = 80; // Tinggi
+        }
+
+        // Menampilkan hasil
+        document.getElementById(
+          "hasil"
+        ).innerText = `Kecepatan kipas yang disarankan: ${kecepatanKipas}%`;
+      }
+    </script>
+  </body>
+</html>
